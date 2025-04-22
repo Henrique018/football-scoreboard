@@ -1,0 +1,36 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+import { cn } from "@/lib/cn";
+import { routes } from "@/config/constants";
+
+export default function Navigation() {
+  const pathname = usePathname();
+
+  return (
+    <nav className="flex items-center justify-between p-4 container mx-auto pt-10">
+      <p className="uppercase font-mono font-bold">⚽ Football Scoreboard</p>
+
+      <ul className="hidden sm:flex gap-6">
+        {Object.entries(routes).map(([path, { icon, label }]) => {
+          const Icon = icon;
+          return (
+            <li key={path}>
+              <Link
+                href={path}
+                className={cn("flex items-center text-foreground/80 hover:text-foreground", {
+                  "text-primary": pathname === path,
+                })}
+              >
+                <Icon />
+                <span className="ml-1 font-semibold">{label}</span>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+}
