@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { routes } from "@/config/constants";
-import { cn } from "@/lib/cn";
+import { routes } from '@/config/constants';
+import { cn } from '@/utils/cn';
 
 export default function MobileNavigation() {
   const pathname = usePathname();
@@ -18,10 +18,10 @@ export default function MobileNavigation() {
             key={path}
             href={path}
             className={cn(
-              "flex flex-col items-center text-sm text-foreground/70 hover:text-foreground",
+              'flex flex-col items-center text-sm text-foreground/70 hover:text-foreground',
               {
-                "text-primary": pathname === path,
-              }
+                'text-primary': pathname === path,
+              },
             )}
           >
             <Icon />

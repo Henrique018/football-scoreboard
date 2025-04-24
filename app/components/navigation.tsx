@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-import { cn } from "@/lib/cn";
-import { routes } from "@/config/constants";
+import { routes } from '@/config/constants';
+import { cn } from '@/utils/cn';
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -22,12 +22,9 @@ export default function Navigation() {
             <Link
               key={path}
               href={path}
-              className={cn(
-                "flex items-center text-foreground/80 hover:text-foreground",
-                {
-                  "text-primary": pathname === path,
-                }
-              )}
+              className={cn('flex items-center text-foreground/80 hover:text-foreground', {
+                'text-primary': pathname === path,
+              })}
             >
               <Icon />
               <span className="ml-1 font-semibold">{label}</span>
