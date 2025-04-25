@@ -18,7 +18,7 @@ export default function Table<TData, TValue>({ data, columns }: TableProps<TData
   return (
     <div className="w-full border border-contrast rounded-lg overflow-y-auto sm:overflow-hidden">
       <table className="w-full text-sm sm:text-base ">
-        <thead className="[&_tr]:border-b [&_tr]:border-contrast background-linear rounded-xl">
+        <thead className="[&_tr]:border-b [&_tr]:border-contrast background-linear rounded-xl text-white">
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (

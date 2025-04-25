@@ -1,4 +1,4 @@
-import { StandingsRoot } from '@/services/espn/types';
+import { StandingsRoot } from '@/services/espn/standings/types';
 
 export const mapStandings = (standings: StandingsRoot) => {
   const entries = standings.children[0].standings.entries.map((entry, idx) => {

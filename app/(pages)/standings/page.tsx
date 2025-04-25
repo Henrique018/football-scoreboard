@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { unstable_cacheLife as cacheLife } from 'next/cache';
 
-import { fetchStandings } from '@/services/espn';
+import { fetchStandings } from '@/services/espn/standings';
 import Table from '@/components/table';
 import { columns } from './columns';
 

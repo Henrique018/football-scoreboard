@@ -10,7 +10,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <header className="flex items-center justify-between p-4 container mx-auto pt-10">
+    <header className="flex items-center justify-between p-4 container mx-auto pt-10 sm:mb-4">
       <Link href="/" className="flex items-center">
         <p className="uppercase font-mono font-bold">⚽ Football Scoreboard</p>
       </Link>
