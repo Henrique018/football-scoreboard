@@ -8,7 +8,7 @@ import { cn } from '@/utils/cn';
 
 export default function MobileNavigation() {
   const pathname = usePathname();
-   const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
 
   return (
     <nav className="flex sm:hidden items-center justify-center w-full gap-10 fixed bottom-0 border-t border-white/20 p-4 dark:bg-white/10 bg-black/15  backdrop-blur-sm shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-t-xl">

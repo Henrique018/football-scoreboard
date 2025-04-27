@@ -14,18 +14,20 @@ export default async function StandingsPage({ searchParams }: StandingsPageProps
   const { standings } = await fetchStandings(league);
 
   return (
-    <div className="flex flex-col px-4 container mx-auto md:pt-8 mb-20 sm:mb-6">
-      <div className="flex items-center justify-between mb-4 sm:mb-8">
-        <h1 className="hidden sm:block text-2xl font-mono">Standings</h1>
+    <Suspense>
+      <div className="flex flex-col px-4 container mx-auto md:pt-8 mb-20 sm:mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-8">
+          <h1 className="hidden sm:block text-2xl font-mono">Standings</h1>
 
-        <Suspense>
-          <AppFilters />
+          <Suspense>
+            <AppFilters />
+          </Suspense>
+        </div>
+
+        <Suspense fallback={<div className="text-center">Loading...</div>}>
+          <Table columns={columns} data={standings} />
         </Suspense>
       </div>
-
-      <Suspense fallback={<div className="text-center">Loading...</div>}>
-        <Table columns={columns} data={standings} />
-      </Suspense>
-    </div>
+    </Suspense>
   );
 }

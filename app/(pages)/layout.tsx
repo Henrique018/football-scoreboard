@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Navigation from '@/components/navigation';
@@ -42,9 +43,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navigation />
+        <Suspense>
+          <Navigation />
+        </Suspense>
         <main className="flex flex-col h-screen flex-grow">{children}</main>
-        <MobileNavigation />
+        <Suspense>
+          <MobileNavigation />
+        </Suspense>
       </body>
     </html>
   );
