@@ -12,6 +12,9 @@ export const getGames = async (
     }&lang=${
       region || 'pt'
     }&contentorigin=deportes&configuration=SITE_DEFAULT&platform=web&tz=America%2FNew_York&postalCode=01101-080&dates=${dates}`,
+    // {
+    //   cache: 'force-cache',
+    // },
   );
 
   if (!res.ok) {
@@ -20,9 +23,5 @@ export const getGames = async (
 
   const data = await res.json();
 
-  const events = mapToGames(data.sports[0]);
-
-  return {
-    events,
-  };
+  return mapToGames(data.sports[0]);
 };

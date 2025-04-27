@@ -66,7 +66,7 @@ export default function GameCard({
               <p>Final</p>
             ) : (
               <>
-                <p className="mt-1 text-xs uppercase font-semibold mb-1">{`${status.period}º half`}</p>
+                <p className="mt-1 text-xs uppercase font-semibold mb-1 whitespace-nowrap">{`${status.period}º half`}</p>
                 <p className="text-xs">{status.clock}</p>
 
                 <div className="flex items-center mt-4 gap-2">
@@ -79,7 +79,7 @@ export default function GameCard({
         </>
       )}
 
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center text-center">
         <Image
           src={awayTeam.logo}
           alt={`${awayTeam.name} logo`}

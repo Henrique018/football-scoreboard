@@ -1,7 +1,11 @@
 import { StandingsRoot } from '@/services/espn/standings/types';
 
 export const mapStandings = (standings: StandingsRoot) => {
-  const entries = standings.children[0].standings.entries.map((entry, idx) => {
+  if (!standings || !standings.children?.[0]?.standings?.entries) {
+    return [];
+  }
+
+  const entries = standings.children?.[0].standings.entries.map((entry, idx) => {
     const stats = entry.stats.reduce((acc, stat) => {
       acc[stat.name] = Number(stat.value) || 0;
       return acc;

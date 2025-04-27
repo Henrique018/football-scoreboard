@@ -2,7 +2,15 @@ import { GameStatus } from '@/components/game-card';
 import { Sport } from '@/services/espn/games/types';
 
 export const mapToGames = (sport: Sport) => {
-  const events = sport.leagues[0].events.map((event) => {
+  if (!sport?.leagues || sport?.leagues?.length === 0 || !sport.leagues[0]?.events) {
+    return {
+      events: [],
+      smartDates: [],
+      leagueName: '',
+    };
+  }
+
+  const events = sport.leagues[0]?.events.map((event) => {
     const homeTeam = event.competitors.find((team) => team.homeAway === 'home');
     const awayTeam = event.competitors.find((team) => team.homeAway === 'away');
 
@@ -31,5 +39,9 @@ export const mapToGames = (sport: Sport) => {
     };
   });
 
-  return events;
+  return {
+    events,
+    leagueName: sport.leagues[0]?.name || '',
+    smartDates: sport.leagues[0]?.smartdates.map((date) => date) || [],
+  };
 };

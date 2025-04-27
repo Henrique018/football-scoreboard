@@ -1,32 +1,45 @@
 import { Suspense } from 'react';
-import { unstable_cacheLife as cacheLife } from 'next/cache';
 
 import { getGames } from '@/services/espn/games';
 import GameCard from '@/components/game-card';
-import DateFilters from '@/components/date-filters';
+import AppFilters from '@/components/app-filters';
 import { Skeleton } from '@/components/skeleton';
 
-export default async function Home() {
-  'use cache';
-  cacheLife('hours');
+type HomePageProps = {
+  searchParams: Promise<{ [key: string]: string }>;
+};
 
-  const { events } = await getGames('20250426');
-
-  console.log(events);
+export default async function Home({ searchParams }: HomePageProps) {
+  const { league, date } = await searchParams;
+  const { leagueName, events, smartDates } = await getGames(date || '', league);
 
   return (
     <div className="flex flex-col p-4 container mx-auto md:pt-8">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-mono">Games</h1>
+        <h1 className="hidden sm:block text-2xl font-mono">{leagueName}</h1>
 
         <Suspense>
-          <DateFilters />
+          <AppFilters showDatePicker smartDates={smartDates} />
         </Suspense>
       </div>
 
-      <div className="flex flex-col gap-4 sm:grid sm:grid-cols-3 md:gap-6">
-        <Suspense fallback={<Skeleton className="h-[150px] w-full rounded-2xl" />}>
-          {events.map((game) => (
+      {events.length === 0 && (
+        <div className="flex items-center justify-center w-full h-[150px]">
+          <h2 className="text-lg font-mono">No games available for this date</h2>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
+        <Suspense
+          fallback={
+            <>
+              <Skeleton className="h-[150px] w-full rounded-2xl" />
+              <Skeleton className="h-[150px] w-full rounded-2xl" />
+              <Skeleton className="h-[150px] w-full rounded-2xl" />
+            </>
+          }
+        >
+          {events?.map((game) => (
             <GameCard
               key={game.id}
               homeTeam={game.homeTeam}

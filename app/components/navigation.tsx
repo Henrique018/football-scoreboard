@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { routes } from '@/config/constants';
 import { cn } from '@/utils/cn';
 
 export default function Navigation() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <header className="flex items-center justify-between p-4 container mx-auto pt-10 sm:mb-4">
@@ -21,7 +22,7 @@ export default function Navigation() {
           return (
             <Link
               key={path}
-              href={path}
+              href={searchParams.size ? `${path}?${searchParams.toString()}` : path}
               className={cn('flex items-center text-foreground/80 hover:text-foreground', {
                 'text-primary': pathname === path,
               })}
