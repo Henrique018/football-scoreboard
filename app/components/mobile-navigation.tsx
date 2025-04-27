@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 
 import { routes } from '@/config/constants';
 import { cn } from '@/utils/cn';
 
 export default function MobileNavigation() {
   const pathname = usePathname();
+   const searchParams = useSearchParams();
 
   return (
     <nav className="flex sm:hidden items-center justify-center w-full gap-10 fixed bottom-0 border-t border-white/20 p-4 dark:bg-white/10 bg-black/15  backdrop-blur-sm shadow-[0_4px_30px_rgba(0,0,0,0.1)] rounded-t-xl">
@@ -16,7 +17,7 @@ export default function MobileNavigation() {
         return (
           <Link
             key={path}
-            href={path}
+            href={searchParams.size ? `${path}?${searchParams.toString()}` : path}
             className={cn(
               'flex flex-col items-center text-sm text-foreground/70 hover:text-foreground',
               {
